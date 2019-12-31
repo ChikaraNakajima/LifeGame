@@ -1,0 +1,22 @@
+{
+    "interval": 10,
+    "lifegame": {
+        "color_0": [
+            72,
+            72,
+            72
+        ],
+        "color_1": [
+            255,
+            191,
+            191
+        ],
+        "height": 180,
+        "lr": true,
+        "pixel": 3,
+        "probability": 20,
+        "rule": "23/3",
+        "tb": true,
+        "width": 240
+    }
+}
