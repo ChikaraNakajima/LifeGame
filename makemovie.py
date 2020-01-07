@@ -40,7 +40,7 @@ def main():
         30.0,
         (1280, 720),
     )
-    for i in range(180):
+    for i in range(1800):
         temp = background.copy()
         temp.paste(lg.imagepil, (0, 0))
         draw = ImageDraw.Draw(temp)
