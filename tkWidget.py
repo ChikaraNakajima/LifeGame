@@ -42,8 +42,8 @@ class FrameRGB(Frame):
         ))
         return None
 
-    def set(self, r=0, g=0, b=0):
-        r, g, b = int(r), int(g), int(b)
+    def set(self, color=(0, 0, 0)):
+        r, g, b = [int(i) for i in color[:3]]
         self.scale["red"].set(r)
         self.scale["green"].set(g)
         self.scale["blue"].set(b)
@@ -69,18 +69,20 @@ class FrameCheckbuttons(Frame):
         self.checkbutton = {u: Checkbutton(
             self, text=u, onvalue=u, offvalue="", variable=v,
         ) for u, v in zip(labels, self.value)}
-        Label(self, text=text).pack(fill=BOTH)
+        if text:
+            Label(self, text=text).pack(fill=BOTH)
         for i in labels:
             self.checkbutton[i].pack(anchor=W)
         return None
 
-    def set(self, *args):
-        for i in self.checkbutton.values():
-            i.deselect()
-        for i in args:
-            i = str(i)
-            if i in self.checkbutton.keys():
-                self.checkbutton[i].select()
+    def set(self, config=None):
+        if config:
+            for i in self.checkbutton.values():
+                i.deselect()
+            for i in config:
+                i = str(i)
+                if i in self.checkbutton.keys():
+                    self.checkbutton[i].select()
         return None
 
     def get(self):
@@ -131,9 +133,9 @@ class FrameScale(Frame):
             self.scale[i[0]].pack(anchor=W)
         return None
 
-    def set(self, *args):
+    def set(self, scale):
         temp = set(self.scale.keys())
-        for u, v in args:
+        for u, v in scale:
             u, v = str(u), int(v)
             if u in temp:
                 self.scale[u].set(v)

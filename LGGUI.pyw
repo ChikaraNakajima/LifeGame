@@ -39,8 +39,8 @@ class FrameRule(Frame):
 
     def set(self, rule="23/3"):
         temp = rule.split("/")
-        self.frame[0].set(*temp[0])
-        self.frame[1].set(*temp[1])
+        self.frame[0].set(temp[0])
+        self.frame[1].set(temp[1])
         return None
 
     def get(self):
@@ -139,18 +139,18 @@ class FrameConfigure(Frame):
                     "color_1": (26, 195, 191),
                 },
             }
-        self.color[0].set(*config["lifegame"]["color_1"])
-        self.color[1].set(*config["lifegame"]["color_0"])
+        self.color[0].set(config["lifegame"]["color_1"])
+        self.color[1].set(config["lifegame"]["color_0"])
         self.loop[0].set(config["lifegame"]["tb"])
         self.loop[1].set(config["lifegame"]["lr"])
         self.rule.set(config["lifegame"]["rule"])
-        self.scale.set(
+        self.scale.set([
             ("width", config["lifegame"]["width"]),
             ("height", config["lifegame"]["height"]),
             ("probability", config["lifegame"]["probability"]),
             ("pixel", config["lifegame"]["pixel"]),
             ("interval", config["interval"]),
-        )
+        ])
         return None
 
     def save(self):
