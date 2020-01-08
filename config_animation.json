@@ -1,1 +1,0 @@
-{"interval": 10, "lifegame": {"color_0": [72, 72, 96], "color_1": [255, 195, 191], "rule": "23/3", "scale": [["width", 300], ["height", 240], ["pixel", 2], ["probability", 15]], "checkbutton": ["top bottom", "left right", "generation"]}}

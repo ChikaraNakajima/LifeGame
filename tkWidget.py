@@ -135,7 +135,7 @@ class FrameScale(Frame):
 
     def set(self, scale):
         temp = set(self.scale.keys())
-        for u, v in scale:
+        for u, v in scale.items():
             u, v = str(u), int(v)
             if u in temp:
                 self.scale[u].set(v)

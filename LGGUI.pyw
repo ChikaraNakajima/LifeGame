@@ -144,13 +144,13 @@ class FrameConfigure(Frame):
         self.loop[0].set(config["lifegame"]["tb"])
         self.loop[1].set(config["lifegame"]["lr"])
         self.rule.set(config["lifegame"]["rule"])
-        self.scale.set([
-            ("width", config["lifegame"]["width"]),
-            ("height", config["lifegame"]["height"]),
-            ("probability", config["lifegame"]["probability"]),
-            ("pixel", config["lifegame"]["pixel"]),
-            ("interval", config["interval"]),
-        ])
+        self.scale.set({
+            "width": config["lifegame"]["width"],
+            "height": config["lifegame"]["height"],
+            "probability": config["lifegame"]["probability"],
+            "pixel": config["lifegame"]["pixel"],
+            "interval": config["interval"],
+        })
         return None
 
     def save(self):

@@ -71,12 +71,12 @@ class FrameLifeGame(Frame):
         self.color_1.set(config.get("color_1", [255, 195, 191]))
         self.rule.set(config.get("rule", "23/3"))
         self.checkbutton.set(config.get("checkbutton", ["top bottom", "left right"]))
-        self.scale.set(config.get("scale", [
-            ["width", 300],
-            ["height", 240],
-            ["pixel", 2],
-            ["probability", 15],
-        ]))
+        self.scale.set(config.get("scale", {
+            "width": 300,
+            "height": 240,
+            "pixel": 2,
+            "probability": 15,
+        }))
         return None
 
     def get(self, *args, **kwargs):
@@ -105,7 +105,7 @@ class FrameLifeGame(Frame):
             "color_0": self.color_0.get(),
             "color_1": self.color_1.get(),
             "rule": self.rule.get(),
-            "scale": [[u, v] for u, v in self.scale.get().items()],
+            "scale": self.scale.get(),
             "checkbutton": self.checkbutton.get(),
         }
         return config
