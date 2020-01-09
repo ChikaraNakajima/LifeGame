@@ -156,8 +156,10 @@ class FrameLifeGameAnimationConfigure(Frame):
     def reset(self):
         if self.json.is_file():
             config = json.loads(self.json.read_text())
-            self.interval.set(config["interval"])
-            self.flg.set(config["lifegame"])
+        else:
+            config = {}
+        self.interval.set(config.get("interval", 10))
+        self.flg.set(config.get("lifegame", None))
         return None
 
     def save(self):
@@ -261,7 +263,7 @@ class FrameLifeGameMovieConfigure(Frame):
         self.radiobutton["resolution"].set(config.get("resolution", "1920 1080"))
         self.radiobutton["fps"].set(config.get("fps", 30))
         self.scale.set(config.get("second", 60))
-        self.flg.set(config.get("lifegame", {}))
+        self.flg.set(config.get("lifegame", None))
         return None
 
     def save(self):
