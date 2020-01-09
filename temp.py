@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 import json
 from pathlib import Path
-from LifeGame import LifeGame
-from tkWidget import *
 import tkinter.font as font
-from LifeGame import LifeGame
-from datetime import datetime
+
+import cv2
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
-import cv2
 
-home = Path(__file__).resolve().parent
+from lib.LifeGame import LifeGame
+from lib.tkWidget import *
+
+home = Path(__file__).resolve().with_name("lib")
 
 class FrameRule(Frame):
     def __init__(self, master=None, *args, **kwargs):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
 from pathlib import Path
-from LifeGame import LifeGame
-from tkWidget import *
+from lib.LifeGame import LifeGame
+from lib.tkWidget import *
 
 
 class FrameLifeGame(Frame):
@@ -54,7 +54,7 @@ class FrameConfigure(Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master.title("Life Game")
-        self.json = Path(__file__).resolve().with_suffix(".json")
+        self.json = Path(__file__).resolve().with_name("lib").joinpath(Path(__file__).with_suffix(".json").name)
         frame = (Frame(self), Frame(self), Frame(self), Frame(self))
         self.color = (
             FrameRGB(master=frame[0], text="Living Cell"),
