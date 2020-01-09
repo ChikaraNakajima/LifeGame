@@ -5,7 +5,8 @@ from pathlib import Path
 import tkinter.font as font
 
 import cv2
-from PIL import Image, ImageDraw, ImageFont
+import PIL
+from PIL import ImageDraw, ImageFont
 import numpy as np
 
 from lib.LifeGame import LifeGame
@@ -43,8 +44,8 @@ class FrameLifeGame(Frame):
     def __init__(self, master=None, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
         frame = [Frame(self), Frame(self), Frame(self)]
-        self.color_1 = FrameRGB(master=frame[0], text="Living Cell")
-        self.color_0 = FrameRGB(master=frame[0], text="Dead Cell")
+        self.color_1 = FrameRGB(master=frame[0], text="Living Cell".center(12))
+        self.color_0 = FrameRGB(master=frame[0], text="Dead Cell".center(12))
         self.rule = FrameRule(frame[1])
         self.checkbutton = FrameCheckbuttons(
             frame[2],
@@ -53,12 +54,12 @@ class FrameLifeGame(Frame):
         )
         self.scale = FrameScale(
             master=frame[2],
-            scale=(("width", 100, 300), ("height", 100, 300), ("pixel", 1, 6), ("probability", 1, 100)),
+            scale=(("width", 120, 360), ("height", 120, 360), ("pixel", 1, 6), ("probability", 1, 100)),
         )
         for i in frame:
             i.pack(fill=BOTH, side=LEFT)
-        self.color_0.pack(fill=BOTH)
         self.color_1.pack(fill=BOTH)
+        self.color_0.pack(fill=BOTH)
         self.rule.pack(fill=BOTH)
         self.scale.pack(fill=BOTH)
         self.checkbutton.pack(fill=BOTH)
@@ -176,7 +177,7 @@ class FrameLifeGameAnimation(Frame):
         self.image = lifegame.imagetk
         self.label = Label(self, image=self.image)
         if "generation" in dir(self.lifegame):
-            self.text = "\n".join(["    Generation : {0:>5}", "    Population : {1:>5}"])
+            self.text = "\n".join(["  Generation : {0:>5}", "  Population : {1:>5}"])
             font_info = font.Font(self, family="Courier New", size=20, weight="bold")
             self.label_info = Label(
                 self,
@@ -207,19 +208,26 @@ class FrameLifeGameMovieConfigure(Frame):
         super().__init__(master, *args, **kwargs)
         self.flg = flg
         self.json = home.joinpath("config_movie.json")
+        frame = [Frame(self), Frame(self)]
+        self.color_background = FrameRGB(master=frame[0], text="Background".center(16))
+        self.color_font = FrameRGB(master=frame[0], text="Font".center(16))
         self.radiobutton = {
-            "resolution": FrameRadiobutton(master=self, text="resolution", labels=["1920 1080", "1280  720"]),
-            "fps": FrameRadiobutton(master=self, text="fps", labels=["30", "24"])
+            "resolution": FrameRadiobutton(master=frame[1], text="resolution", labels=["1920 1080", "1280  720"]),
+            "fps": FrameRadiobutton(master=frame[1], text="fps", labels=["30", "24"])
         }
         self.scale = Scale(
-            master=self, label="second", from_=10, to=60,
+            master=frame[1], label="second", from_=10, to=60,
             orient=HORIZONTAL
         )
         self.button = {
-            "start": Button(master=self, text="Start", command=self.start),
-            "reset": Button(master=self, text="Reset", command=self.reset),
-            "save": Button(master=self, text="Save", command=self.save),
+            "start": Button(master=frame[1], text="Start", command=self.start),
+            "reset": Button(master=frame[1], text="Reset", command=self.reset),
+            "save": Button(master=frame[1], text="Save", command=self.save),
         }
+        for i in frame:
+            i.pack(fill=BOTH, side=LEFT)
+        self.color_background.pack(fill=BOTH)
+        self.color_font.pack(fill=BOTH)
         self.radiobutton["resolution"].pack(fill=BOTH)
         self.radiobutton["fps"].pack(fill=BOTH)
         self.scale.pack(fill=BOTH)
@@ -231,36 +239,41 @@ class FrameLifeGameMovieConfigure(Frame):
 
     def start(self):
         self.button["start"].configure(state=DISABLED)
+        config = self.flg.config()
+        if "generation" in config["checkbutton"]:
+            lifegame = self.flg.get()
+        else:
+            config["checkbutton"] = ["generation"] + list(config["checkbutton"])
+            self.flg.set(config)
+            lifegame = self.flg.get()
+            config["checkbutton"].remove("generation")
+            self.flg.set(config)
         self.button["start"].configure(state=NORMAL)
         return None
 
     def reset(self):
         if self.json.is_file():
             config = json.loads(self.json.read_text())
-            self.radiobutton["resolution"].set(config["resolution"])
-            self.radiobutton["fps"].set(config["fps"])
-            self.scale.set(config["second"])
-            self.flg.set(config["lifegame"])
         else:
-            self.scale.set(60)
+            config = {}
+        self.color_background.set(config.get("color_background", [209, 240, 251]))
+        self.color_font.set(config.get("color_font", [0, 0, 0]))
+        self.radiobutton["resolution"].set(config.get("resolution", "1920 1080"))
+        self.radiobutton["fps"].set(config.get("fps", 30))
+        self.scale.set(config.get("second", 60))
+        self.flg.set(config.get("lifegame", {}))
         return None
 
     def save(self):
         config = {
+            "color_background": self.color_background.get(),
+            "color_font": self.color_font.get(),
             "resolution": self.radiobutton["resolution"].get(),
             "fps": self.radiobutton["fps"].get(),
             "second": self.scale.get(),
             "lifegame": self.flg.config(),
         }
         self.json.write_text(json.dumps(config))
-        return None
-
-
-class FrameProgressBar(Frame):
-    def __init__(self, master=None, resolution=(1280, 720), fps=30, *args, **kwargs):
-        super().__init__(master, *args, **kwargs)
-        self.label = Label(self)
-        self.label.pack(fill=BOTH)
         return None
 
 
