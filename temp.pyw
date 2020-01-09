@@ -72,7 +72,7 @@ class FrameLifeGame(Frame):
         self.color_0.set(config.get("color_0", [72, 72, 96]))
         self.color_1.set(config.get("color_1", [255, 195, 191]))
         self.rule.set(config.get("rule", "23/3"))
-        self.checkbutton.set(config.get("checkbutton", ["top bottom", "left right"]))
+        self.checkbutton.set(config.get("checkbutton", ["top bottom", "left right", "generation"]))
         self.scale.set(config.get("scale", {
             "width": 300,
             "height": 240,
