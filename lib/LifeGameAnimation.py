@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import tkinter as tk
 import tkinter.font as Font
-from LifeGameConfigure import FrameLifeGame
+from lib.LifeGameConfigure import FrameLifeGame
 
 
 class FrameLifeGameAnimationConfigure(tk.Frame):

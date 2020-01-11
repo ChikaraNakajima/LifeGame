@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from LifeGame import LifeGame
-from tkWidget import *
+from lib.LifeGame import LifeGame
+from lib.tkWidget import *
 
 
 class FrameRule(tk.Frame):
