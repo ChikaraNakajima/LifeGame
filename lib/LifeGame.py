@@ -100,7 +100,4 @@ class LifeGame:
 
 
 if __name__ == "__main__":
-    lg = LifeGame(generation=True)
-    for i in range(300):
-        lg.next()
-    print(lg.generation)
+    pass

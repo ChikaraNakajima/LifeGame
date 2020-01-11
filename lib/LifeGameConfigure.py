@@ -62,7 +62,7 @@ class FrameLifeGame(tk.Frame):
         temp_scale = self.scale.get()
         temp_checkbutton = self.checkbutton.get()
         temp_checkbutton = {i: i in temp_checkbutton for i in ["top bottom", "left right", "generation"]}
-        lg = LifeGame(
+        lifegame = LifeGame(
             color_0=self.color_0.get(),
             color_1=self.color_1.get(),
             rule=self.rule.get(),
@@ -74,7 +74,7 @@ class FrameLifeGame(tk.Frame):
             lr=temp_checkbutton["left right"],
             generation=temp_checkbutton["generation"],
         )
-        return lg
+        return lifegame
 
     def config(self, *args, **kwargs):
         config = {
@@ -88,6 +88,4 @@ class FrameLifeGame(tk.Frame):
 
 
 if __name__ == "__main__":
-    temp = FrameLifeGame()
-    temp.pack()
-    temp.mainloop()
+    pass
