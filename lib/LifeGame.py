@@ -7,9 +7,15 @@ from PIL.ImageTk import PhotoImage
 class LifeGame:
     def __init__(
         self,
-        width=120, height=120, probability=20,
-        rule="23/3", tb=True, lr=True,
-        pixel=6, color_0=(29, 29, 29), color_1=(26, 195, 191),
+        color_0=(29, 29, 29),
+        color_1=(26, 195, 191),
+        rule="23/3",
+        width=120,
+        height=120,
+        pixel=6,
+        probability=20,
+        tb=True,
+        lr=True,
         generation=False,
         *args, **kwargs
     ):
@@ -94,7 +100,4 @@ class LifeGame:
 
 
 if __name__ == "__main__":
-    lg = LifeGame(generation=True)
-    for i in range(300):
-        lg.next()
-    print(lg.generation)
+    pass
