@@ -82,7 +82,7 @@ class FrameCheckbuttons(tk.Frame):
         return None
 
     def get(self):
-        return tuple(i.get() for i in self.value if i.get())
+        return [i.get() for i in self.value if i.get()]
 
 
 class FrameRadiobutton(tk.Frame):
