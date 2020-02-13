@@ -11,8 +11,8 @@ class FrameIntegration(tk.Frame):
         self.master.title("LifeGame")
         edge = {"bd": 2, "relief": "ridge"}
         self.lifegame = FrameLifeGame(self, **edge)
-        self.animation = FrameLifeGameAnimationConfigure(self, flg=self.lifegame, **edge)
         self.movie = FrameLifeGameMovieConfigure(self, flg=self.lifegame, **edge)
+        self.animation = FrameLifeGameAnimationConfigure(self, flg=self.lifegame, **edge)
         self.lifegame.pack(fill=tk.BOTH, side=tk.LEFT)
         self.animation.pack(fill=tk.BOTH, side=tk.LEFT)
         self.movie.pack(fill=tk.BOTH, side=tk.LEFT)
