@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import json
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
@@ -144,7 +143,3 @@ class FrameLifeGameMovieConfigure(tk.Frame):
         }
         self.json.write_text(json.dumps(config))
         return None
-
-
-if __name__ == "__main__":
-    pass

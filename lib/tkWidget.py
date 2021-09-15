@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import tkinter as tk
 
 
@@ -7,7 +6,7 @@ class FrameRGB(tk.Frame):
         super().__init__(master, *args, **kwargs)
         frame = (tk.Frame(master=self), tk.Frame(master=self))
         self.label = {
-            "text": tk.Label(master=frame[0], text=text),
+            "text": tk.Label(master=frame[0], text=str(text)),
             "color": tk.Label(master=frame[0]),
         }
         self.scale = {
@@ -140,7 +139,3 @@ class FrameScale(tk.Frame):
 
     def get(self):
         return {u: v.get() for u, v in self.scale.items()}
-
-
-if __name__ == "__main__":
-    pass

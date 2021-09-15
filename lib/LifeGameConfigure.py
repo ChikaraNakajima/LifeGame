@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from lib.LifeGame import LifeGame
 from lib.tkWidget import *
 
@@ -37,7 +36,15 @@ class FrameLifeGame(tk.Frame):
         self.color_0 = FrameRGB(master=frame[0], text="Dead Cell".center(12))
         self.rule = FrameRule(frame[1])
         self.checkbutton = FrameCheckbuttons(frame[2],text="others", labels=["top bottom", "left right", "generation"])
-        self.scale = FrameScale(master=frame[2], scale=(("width", 120, 360), ("height", 120, 360), ("pixel", 1, 6), ("probability", 1, 100)))
+        self.scale = FrameScale(
+                master=frame[2],
+                scale=(
+                    ("width"        , 120   , 960),
+                    ("height"       , 120   , 540),
+                    ("pixel"        , 1     , 3),
+                    ("probability"  , 1     , 100)
+                ),
+        )
         for i in frame:
             i.pack(fill=tk.BOTH, side=tk.LEFT)
         self.color_1.pack(fill=tk.BOTH)
@@ -85,7 +92,3 @@ class FrameLifeGame(tk.Frame):
             "checkbutton": self.checkbutton.get(),
         }
         return config
-
-
-if __name__ == "__main__":
-    pass

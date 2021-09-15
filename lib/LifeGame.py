@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 from PIL.Image import fromarray
 from PIL.ImageTk import PhotoImage
@@ -7,24 +6,28 @@ from PIL.ImageTk import PhotoImage
 class LifeGame:
     def __init__(
         self,
-        color_0=(29, 29, 29),
-        color_1=(26, 195, 191),
-        rule="23/3",
-        width=120,
-        height=120,
-        pixel=6,
-        probability=20,
-        tb=True,
-        lr=True,
-        generation=False,
-        *args, **kwargs
+        color_0     = ( 29,  29,  29),
+        color_1     = ( 26, 195, 191),
+        rule        = "23/3",
+        width       = 120,
+        height      = 120,
+        pixel       = 6,
+        probability = 20,
+        tb          = True,
+        lr          = True,
+        generation  = False,
+        *args, **kwargs,
     ):
         width = int(width)
         height = int(height)
         self.lattice = np.zeros([height, width], dtype=int)
         self.lattice[np.random.randint(1, 100, [height, width]) <= probability] = 1
-        temp = [-1, 0, 1]
-        self.ij = [(u, v) for u in temp for v in temp if u or v]
+        self.ij = [
+                (u, v)
+                for u in [-1, 0, 1]
+                for v in [-1, 0, 1]
+                if u or v
+        ]
         self.rule = {
             u: sorted({int(i) for i in v if i in "012345678"})
             for u, v in enumerate(rule.split("/")[::-1])
@@ -97,7 +100,3 @@ class LifeGame:
     @property
     def population(self):
         return np.count_nonzero(self.lattice)
-
-
-if __name__ == "__main__":
-    pass
