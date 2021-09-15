@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import json
 from pathlib import Path
 import tkinter as tk
@@ -92,7 +91,3 @@ class FrameLifeGameAnimation(tk.Frame):
         self.lifegame.next()
         self.after(self.interval, self.next)
         return None
-
-
-if __name__ == "__main__":
-    pass
